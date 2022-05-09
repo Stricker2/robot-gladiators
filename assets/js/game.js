@@ -11,7 +11,7 @@ var playerMoney = 10;
 
 var enemyNames = ["Roborto", "Amy Andriod", "Robo Trumble"];
 var enemyHealth = 50;
-var enemyAttack = 12;
+var enemyAttack = 20;
 
 var fight = function(enemyNames) {
 
@@ -28,39 +28,44 @@ var fight = function(enemyNames) {
             }
         }
 
-        if (promptFight === "fight" || promptFight === "FIGHT") {
+        enemyHealth = enemyHealth - playerAttack;
+        console.log(
+            playerName + " attacked " + enemyNames + ". " + enemyNames + " now has " + enemyHealth + " health remaining."
+        );
 
-            enemyHealth = enemyHealth - playerAttack;
-            console.log(
-                playerName + " attacked " + enemyNames + ". " + enemyNames + " now has " + enemyHealth + " health remaining."
-            );
+        if (enemyHealth <= 0) {
+            window.alert(enemyNames + " has died!");
+            break;
+        }
+        else {
+            window.alert(enemyNames + " still has " + enemyHealth + " health left.");
+        }
 
-            if (enemyHealth <= 0) {
-                window.alert(enemyNames + " has died!");
-                break;
-            }
-            else {
-                window.alert(enemyNames + " still has " + enemyHealth + " health left.");
-            }
+        playerHealth = playerHealth - enemyAttack;
+        console.log(
+            enemyNames + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
+        );
 
-            playerHealth = playerHealth - enemyAttack;
-            console.log(
-                enemyNames + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
-            );
-
-            if (playerHealth<= 0) {
-                window.alert(playerName + " has died!");
-                break;
-            }
-            else {
-                window.alert(playerName + " still has " + playerHealth + " health left.");
-            }
+        if (playerHealth<= 0) {
+            window.alert(playerName + " has died!");
+            break;
+        }
+        else {
+            window.alert(playerName + " still has " + playerHealth + " health left.");
         }
     }
 };
 
 for(var i = 0; i < enemyNames.length; i++) {
-    var pickedEnemyName = enemyNames[i];
-    enemyHealth = 50;
-    fight(pickedEnemyName);
+    if (playerHealth > 0) {
+        window.alert("Welcome to Robot Gladiators! Round " + ( i + 1 ) );
+        var pickedEnemyName = enemyNames[i];
+        enemyHealth = 50;
+        // debugger;
+        fight(pickedEnemyName);
+    }
+    else {
+        window.alert("You have lost your robot in battle! Game Over!");
+        break;
+    }
 }

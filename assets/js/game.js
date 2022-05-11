@@ -4,6 +4,12 @@
     // * Defeat each enemy-robot
 // "LOSE" - Player robot's health is zero or less
 
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+    return value;
+};
+
 var fightOrSkip = function() {
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
 
@@ -74,11 +80,15 @@ var startGame = function() {
     playerInfo.reset();
 
     for(var i = 0; i < enemyInfo.length; i++) {
+        console.log(playerInfo);
+
         if (playerInfo.health > 0) {
-            window.alert("Welcome to Robot Gladiators! Round " + ( i + 1 ) );
+            window.alert("Welcome to Robot Gladiators! Round " + ( i + 1 ));
             // debugger;
             var pickedEnemyObj = enemyInfo[i];
-            pickedEnemyObj.health = randomNumber(40, 60);            
+            pickedEnemyObj.health = randomNumber(40, 60);     
+            console.log(pickedEnemyObj);
+
             fight(pickedEnemyObj);
             if (playerInfo.health > 0 && i < enemyInfo.length - 1) {
                 var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
@@ -146,12 +156,6 @@ var shop = function() {
             shop();
             break;
     }
-};
-
-var randomNumber = function(min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1) + min);
-
-    return value;
 };
 
 var getPlayerName = function() {
